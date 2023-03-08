@@ -50,7 +50,7 @@
 
 > Link to deployed project.
 
-- [Live Demo Link]()
+- [Live Demo Link](https://yodit93.github.io/Leaderboard/dist)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,7 +70,7 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-``git clone `https://github.com/yodit93/Todo-list-app.git`
+git clone `https://github.com/yodit93/Leaderboard.git`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
