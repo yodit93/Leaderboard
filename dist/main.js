@@ -116,17 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _module_add_list_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./module/add-list.js */ \"./src/module/add-list.js\");\n/* harmony import */ var _module_UI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module/UI.js */ \"./src/module/UI.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n\n\nconst form = document.querySelector('.form');\nconst inputName = document.querySelector('.input-name');\nconst inputScore = document.querySelector('.input-score');\n\n_module_UI_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].display();\n\nform.addEventListener('submit', (e) => {\n  e.preventDefault();\n  const namevalue = inputName.value;\n  const scorevalue = inputScore.value;\n  (0,_module_add_list_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(namevalue, scorevalue);\n  inputName.value = '';\n  inputScore.value = '';\n});\n\n//# sourceURL=webpack://todo-list-app/./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/module/UI.js":
-/*!**************************!*\
-  !*** ./src/module/UI.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ UI)\n/* harmony export */ });\n/* harmony import */ var _storage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage.js */ \"./src/module/storage.js\");\n\n\nconst scoreList = document.querySelector('.score-list');\n\nclass UI {\n  constructor(listArr) {\n    this.listArr = listArr;\n  }\n\n  static display = () => {\n    this.listArr = (0,_storage_js__WEBPACK_IMPORTED_MODULE_0__.getLists)();\n    scoreList.innerHTML = '';\n    this.listArr.forEach((list) => {\n      const score = document.createElement('li');\n      score.className = 'list';\n      score.innerHTML = `<p class=\"list-par\" id=${list.id}>${list.name}: ${list.score}</p>`;\n      scoreList.appendChild(score);\n    });\n  }\n}\n\n//# sourceURL=webpack://todo-list-app/./src/module/UI.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _module_add_list_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./module/add-list.js */ \"./src/module/add-list.js\");\n/* harmony import */ var _module_get_list_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module/get-list.js */ \"./src/module/get-list.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\r\n\r\n\r\n\r\nconst form = document.querySelector('.form');\r\nconst inputName = document.querySelector('.input-name');\r\nconst inputScore = document.querySelector('.input-score');\r\nconst refresh = document.querySelector('.refresh');\r\n\r\n\r\n\r\nform.addEventListener('submit', (e) => {\r\n  e.preventDefault();\r\n  const namevalue = inputName.value;\r\n  const scorevalue = inputScore.value;\r\n  (0,_module_add_list_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(namevalue, scorevalue);\r\n  inputName.value = '';\r\n  inputScore.value = '';\r\n});\r\n\r\n(0,_module_get_list_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\r\n\r\nrefresh.addEventListener('click', _module_get_list_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\n\n//# sourceURL=webpack://todo-list-app/./src/index.js?");
 
 /***/ }),
 
@@ -136,27 +126,37 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ addList)\n/* harmony export */ });\n/* harmony import */ var _storage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage.js */ \"./src/module/storage.js\");\n/* harmony import */ var _UI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UI.js */ \"./src/module/UI.js\");\n/* harmony import */ var _create_list_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-list.js */ \"./src/module/create-list.js\");\n\n\n\n\nconst addList = (name, score) => {\n  const listArr = (0,_storage_js__WEBPACK_IMPORTED_MODULE_0__.getLists)();\n  const id = listArr.length + 1;\n  const newList = new _create_list_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"](name, score, id);\n  listArr.push(newList);\n  (0,_storage_js__WEBPACK_IMPORTED_MODULE_0__.saveList)(listArr);\n  _UI_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].display();\n};\n\n\n\n\n//# sourceURL=webpack://todo-list-app/./src/module/add-list.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ addList)\n/* harmony export */ });\n/* harmony import */ var _create_game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-game */ \"./src/module/create-game.js\");\n\r\n\r\nconst addList = async (name, score) => {\r\n  const gameId = (0,_create_game__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n  const apiUrl = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;\r\n  const options = {\r\n    method: 'POST',\r\n    body: JSON.stringify({\r\n      user: name,\r\n      score: score\r\n    }),\r\n    headers: {\r\n      'Content-type': 'application/json; charset=UTF-8',\r\n    }\r\n  };\r\n\r\n  const response = await fetch(apiUrl, options);\r\n  const data = await response.json();\r\n  return data;\r\n};\r\n\r\n\r\n\n\n//# sourceURL=webpack://todo-list-app/./src/module/add-list.js?");
 
 /***/ }),
 
-/***/ "./src/module/create-list.js":
+/***/ "./src/module/create-game.js":
 /*!***********************************!*\
-  !*** ./src/module/create-list.js ***!
+  !*** ./src/module/create-game.js ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CreateList)\n/* harmony export */ });\nclass CreateList {\n  constructor(name, score, id) {\n    this.name = name;\n    this.score = score;\n    this.id = id;\n  }\n}\n\n//# sourceURL=webpack://todo-list-app/./src/module/create-list.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst baseURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';\r\n\r\nconst createGame = async (gameName) => {\r\n  const options = {\r\n    method: 'POST',\r\n    body: JSON.stringify({\r\n      name: gameName\r\n    }),\r\n    headers: {\r\n      'Content-Type': 'application/json',\r\n    }\r\n  };\r\n\r\n  const response = await fetch(`${baseURL}games/`, options);\r\n  const data = await response.json();\r\n  const gameId = data.result.split(' ')[3];\r\n  return gameId;\r\n}\r\n\r\nconst checkId = () => {\r\n  let gameId;\r\n  if(localStorage.getItem('id')) {\r\n    gameId = localStorage.getItem('id');\r\n  }\r\n\r\n  else {\r\n    createGame('second').then(data => localStorage.setItem('id', data));\r\n    gameId = localStorage.getItem('id');\r\n  }\r\n  return gameId;\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (checkId);\r\n\r\n\n\n//# sourceURL=webpack://todo-list-app/./src/module/create-game.js?");
 
 /***/ }),
 
-/***/ "./src/module/storage.js":
+/***/ "./src/module/display.js":
 /*!*******************************!*\
-  !*** ./src/module/storage.js ***!
+  !*** ./src/module/display.js ***!
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getLists\": () => (/* binding */ getLists),\n/* harmony export */   \"saveList\": () => (/* binding */ saveList)\n/* harmony export */ });\nconst saveList = (listArr) => {\n  localStorage.setItem('lists', JSON.stringify(listArr));\n};\n\nconst getLists = () => {\n  const listArr = JSON.parse(localStorage.getItem('lists')) || [];\n  return listArr;\n};\n\n\n\n//# sourceURL=webpack://todo-list-app/./src/module/storage.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// import  getLists  from './get-list.js';\r\n// import createGame from './create-game.js';\r\n\r\nconst scoreList = document.querySelector('.score-list');\r\n\r\nconst display = (lists) => {\r\n  scoreList.innerHTML = '';\r\n  lists = lists.sort((a, b) => b.score - a.score);\r\n  lists.forEach((list) => {\r\n    const score = document.createElement('li');\r\n    score.className = 'list';\r\n    score.innerHTML = `<p class=\"list-par\" id=${list.id}>${list.user}: ${list.score}</p>`;\r\n    scoreList.appendChild(score);\r\n  });\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (display);\n\n//# sourceURL=webpack://todo-list-app/./src/module/display.js?");
+
+/***/ }),
+
+/***/ "./src/module/get-list.js":
+/*!********************************!*\
+  !*** ./src/module/get-list.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ getScores)\n/* harmony export */ });\n/* harmony import */ var _create_game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-game */ \"./src/module/create-game.js\");\n/* harmony import */ var _display_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display.js */ \"./src/module/display.js\");\n\r\n\r\n\r\nconst getLists = async () => {\r\n  const gameId = (0,_create_game__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n  const apiUrl = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;\r\n  const response = await fetch(apiUrl);\r\n  if(response.ok){\r\n    const data = await response.json();\r\n    return data;\r\n  }\r\n  throw new Error('Couldnt fetch data');\r\n}\r\n\r\nconst getScores = async () => {\r\n  await getLists().then(data => {\r\n  const listArr = data.result;\r\n  (0,_display_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(listArr);\r\n  return listArr;\r\n  })  \r\n}\r\n\r\n\n\n//# sourceURL=webpack://todo-list-app/./src/module/get-list.js?");
 
 /***/ })
 

@@ -1,14 +1,22 @@
-import { saveList, getLists } from './storage.js';
-import UI from './UI.js';
-import CreateList from './create-list.js';
+import checkId from './create-game.js';
 
-const addList = (name, score) => {
-  const listArr = getLists();
-  const id = listArr.length + 1;
-  const newList = new CreateList(name, score, id);
-  listArr.push(newList);
-  saveList(listArr);
-  UI.display();
+const addList = async (name, score) => {
+  const gameId = checkId();
+  const apiUrl = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      user: name,
+      score,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  };
+
+  const response = await fetch(apiUrl, options);
+  const data = await response.json();
+  return data;
 };
 
 export { addList as default };
