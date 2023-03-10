@@ -12,10 +12,11 @@ form.addEventListener('submit', (e) => {
   const namevalue = inputName.value;
   const scorevalue = inputScore.value;
   addList(namevalue, scorevalue);
+  getScores();
   inputName.value = '';
   inputScore.value = '';
 });
 
-getScores();
-
 refresh.addEventListener('click', getScores);
+
+window.addEventListener('load', getScores);

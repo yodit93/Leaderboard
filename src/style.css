@@ -12,7 +12,7 @@ main {
 }
 
 .main-cont {
-  width: 80vw;
+  width: 87vw;
   margin: auto;
   padding: 3%;
   display: flex;
@@ -23,6 +23,8 @@ main {
 
 .leaderboard-title {
   margin-bottom: 5%;
+  font-weight: bolder;
+  font-size: 3rem;
 }
 
 .container {
@@ -39,6 +41,12 @@ main {
   display: flex;
   justify-content: space-between;
   margin-bottom: 7%;
+}
+
+.add-score,
+.recent-score {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .score-list {
@@ -76,4 +84,13 @@ main {
 
 .submit {
   align-self: flex-end;
+}
+
+.btn {
+  background-color: white;
+  color: black;
+  padding: 2% 5%;
+  box-shadow: 3px 4px black;
+  border: 2px solid black;
+  font-weight: bold;
 }
