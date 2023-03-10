@@ -17,8 +17,6 @@ form.addEventListener('submit', (e) => {
   inputScore.value = '';
 });
 
-
-
 refresh.addEventListener('click', getScores);
 
 window.addEventListener('load', getScores);
