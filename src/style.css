@@ -5,6 +5,7 @@
 }
 
 main {
+  background-color: rgb(224, 199, 161);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,6 +13,7 @@ main {
 }
 
 .main-cont {
+  background-color: rgb(138, 130, 130);
   width: 87vw;
   margin: auto;
   padding: 3%;
@@ -25,6 +27,7 @@ main {
   margin-bottom: 5%;
   font-weight: bolder;
   font-size: 3rem;
+  color: rgb(153, 16, 16);
 }
 
 .container {
@@ -43,10 +46,13 @@ main {
   margin-bottom: 7%;
 }
 
-.add-score,
-.recent-score {
+h2 {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.recent-score {
+  color: lightsalmon;
 }
 
 .score-list {
@@ -58,10 +64,16 @@ main {
 
 .list {
   padding: 2%;
+  color: white;
 }
 
-.list:nth-child(even) {
-  background-color: rgb(229, 229, 229);
+.list:nth-child(odd) {
+  background-color: lightsalmon;
+  color: black;
+}
+
+.list-par {
+  font-size: 1.2rem;
 }
 
 .form {
@@ -72,6 +84,7 @@ main {
 
 .add-score {
   margin-bottom: 10%;
+  color: rgb(153, 16, 16);
 }
 
 .input-name,
